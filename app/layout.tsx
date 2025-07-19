@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from "@vercel/analytics/next";
+import { StagewiseToolbar } from "@stagewise/toolbar-next";
+import ReactPlugin from "@stagewise-plugins/react";
 
 // Load the ABCDiatype font (Regular and Bold only)
 const abcdDiatype = localFont({
@@ -45,9 +47,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${abcdDiatype.variable} ${reckless.variable} antialiased`}
+        className={`${abcdDiatype.variable} ${reckless.variable} font-sans tracking-tight`}
       >
         {children}
+        <StagewiseToolbar
+          config={{
+            plugins: [new ReactPlugin()],
+          }}
+        />
         <Analytics />
       </body>
     </html>
